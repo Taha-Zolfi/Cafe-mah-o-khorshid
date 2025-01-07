@@ -1,0 +1,27 @@
+/* برای کل اسکرول‌بار */
+::-webkit-scrollbar {
+
+  width: 5px; /* عرض اسکرول‌بار */
+  height: 5px; /* ارتفاع اسکرول‌بار (در حالت افقی) */
+}
+
+/* برای بخش داخلی اسکرول‌بار (Track) */
+::-webkit-scrollbar-track {
+  background: #37495e; /* پس‌زمینه اسکرول‌بار */
+  border-radius: 10px; /* شعاع گوشه‌ها */
+}
+
+/* برای بخش قابل حرکت اسکرول‌بار (Thumb) */
+::-webkit-scrollbar-thumb {
+  background: #9b3c2a; /* رنگ بخش قابل حرکت */
+  border-radius: 10px; /* شعاع گوشه‌ها */
+  transition-duration: 300ms;
+
+
+}
+
+/* در حالت هاور روی اسکرول‌بار */
+::-webkit-scrollbar-thumb:hover {
+  background: #662417; /* تغییر رنگ در حالت هاور */
+  transition-duration: 300ms;
+}
