@@ -57,7 +57,6 @@ const First = () => {
           src={logo} 
           alt="ماه و خورشید"
           variants={itemVariants}
-  
         />
       </motion.div>
       <motion.a 
@@ -77,3 +76,4 @@ const First = () => {
 }
 
 export default First;
+

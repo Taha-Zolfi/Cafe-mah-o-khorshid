@@ -11,6 +11,9 @@ const Admin = () => {
   });
   const [file, setFile] = useState(null);
   const [notification, setNotification] = useState({ message: '', type: '' });
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [editFile, setEditFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fixedCategories = [
     "قهوه",
@@ -33,7 +36,9 @@ const Admin = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true);
       const { data, error } = await supabase.from("product").select("*");
+      setLoading(false);
       if (error) {
         console.error("Error fetching products:", error);
         showNotification("خطا در بارگیری محصولات", "error");
@@ -51,6 +56,7 @@ const Admin = () => {
       return;
     }
 
+    setLoading(true);
     const fileName = file ? `${Date.now()}-${file.name}` : null;
 
     let imageUrl = null;
@@ -61,6 +67,7 @@ const Admin = () => {
       if (uploadError) {
         console.error("Error uploading image:", uploadError);
         showNotification("خطا در آپلود تصویر", "error");
+        setLoading(false);
         return;
       }
 
@@ -72,6 +79,8 @@ const Admin = () => {
       .from("product")
       .insert([{ ...newProduct, img_url: imageUrl }])
       .select();
+
+    setLoading(false);
 
     if (error) {
       console.error("Error adding product:", error);
@@ -88,13 +97,69 @@ const Admin = () => {
   };
 
   const deleteProduct = async (id) => {
+    setLoading(true);
     const { error } = await supabase.from("product").delete().eq("id", id);
+    setLoading(false);
     if (error) {
       console.error("Error deleting product:", error);
       showNotification("خطا در حذف محصول", "error");
     } else {
       setProducts(products.filter((prod) => prod.id !== id));
       showNotification("محصول با موفقیت حذف شد", "success");
+    }
+  };
+
+  const startEditing = (product) => {
+    setEditingProduct({ ...product });
+    setEditFile(null);
+  };
+
+  const cancelEditing = () => {
+    setEditingProduct(null);
+    setEditFile(null);
+  };
+
+  const saveEdit = async () => {
+    setLoading(true);
+    let imageUrl = editingProduct.img_url;
+
+    if (editFile) {
+      const fileName = `${Date.now()}-${editFile.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from("product-image")
+        .upload(fileName, editFile);
+
+      if (uploadError) {
+        console.error("Error uploading image:", uploadError);
+        showNotification("خطا در آپلود تصویر", "error");
+        setLoading(false);
+        return;
+      }
+
+      const { data } = supabase.storage.from("product-image").getPublicUrl(fileName);
+      imageUrl = data.publicUrl;
+    }
+
+    const { error } = await supabase
+      .from("product")
+      .update({
+        name: editingProduct.name,
+        price: editingProduct.price,
+        category: editingProduct.category,
+        img_url: imageUrl,
+      })
+      .eq("id", editingProduct.id);
+
+    setLoading(false);
+
+    if (error) {
+      console.error("Error updating product:", error);
+      showNotification("خطا در ویرایش محصول", "error");
+    } else {
+      setProducts(products.map(p => p.id === editingProduct.id ? {...editingProduct, img_url: imageUrl} : p));
+      setEditingProduct(null);
+      setEditFile(null);
+      showNotification("محصول با موفقیت ویرایش شد", "success");
     }
   };
 
@@ -105,6 +170,11 @@ const Admin = () => {
 
   return (
     <div className="admin-container">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+        </div>
+      )}
       <h1 className="admin-title">پنل مدیریت</h1>
 
       {notification.message && (
@@ -150,7 +220,7 @@ const Admin = () => {
           />
         </div>
         
-        <button onClick={addProduct} className="admin-add-button">
+        <button onClick={addProduct} className="admin-add-button" disabled={loading}>
           افزودن محصول
         </button>
 
@@ -164,9 +234,51 @@ const Admin = () => {
                   <p className="admin-product-details">{prod.price} تومان - {prod.category}</p>
                 </div>
               </div>
-              <button onClick={() => deleteProduct(prod.id)} className="admin-delete-button">
-                حذف
-              </button>
+              {editingProduct && editingProduct.id === prod.id ? (
+                <div className="admin-edit-form">
+                  <input
+                    type="text"
+                    value={editingProduct.name}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, name: e.target.value })}
+                    className="admin-input"
+                  />
+                  <input
+                    type="number"
+                    value={editingProduct.price}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, price: e.target.value })}
+                    className="admin-input"
+                  />
+                  <select
+                    value={editingProduct.category}
+                    onChange={(e) => setEditingProduct({ ...editingProduct, category: e.target.value })}
+                    className="admin-input"
+                  >
+                    {fixedCategories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                  <input 
+                    type="file" 
+                    onChange={(e) => setEditFile(e.target.files[0])} 
+                    className="admin-file-input"
+                  />
+                  <div className="admin-edit-actions">
+                    <button onClick={saveEdit} className="admin-edit-button" disabled={loading}>ذخیره</button>
+                    <button onClick={cancelEditing} className="admin-delete-button" disabled={loading}>لغو</button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <button onClick={() => startEditing(prod)} className="admin-edit-button" disabled={loading}>
+                    ویرایش
+                  </button>
+                  <button onClick={() => deleteProduct(prod.id)} className="admin-delete-button" disabled={loading}>
+                    حذف
+                  </button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
