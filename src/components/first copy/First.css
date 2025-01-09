@@ -4,14 +4,28 @@
     --white: #fcf7e3;
 }
 
+@font-face {
+    font-family: 'iransansx';
+    src: url('./assets/iranblack.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'iransansx';
+    src: url('./assets/iranmed.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 body {
     background-color: var(--blue);
-    font-family: 'IRANSansX', sans-serif;
+    font-family: 'iransansx', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-* {font-family: 'IRANSansX', sans-serif;}
+* {font-family: 'iransansx', sans-serif;}
 
 .nav {
     display: none;
