@@ -8,18 +8,17 @@
 
 @font-face {
   font-family: 'iransansx';
-  src: url('./assets/iranblack.woff2') format('woff2');
+  src: url('../../assets/iranblack.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'iransansx';
-  src: url('./assets/iranmed.woff2') format('woff2');
+  src: url('../../assets/iranmed.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
-
 * {
   font-family: 'iransansx', sans-serif;
   box-sizing: border-box;
@@ -102,8 +101,8 @@
   padding: 20px;
   border: none;
   border-radius: 20px;
-  background-color: rgba(155, 60, 42, 0.8);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--brick);
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1.3rem;
@@ -115,7 +114,7 @@
 }
 
 .menu-type-button .icon-container {
-  background-color: var(--white);
+  background-color: var(--brick);
   border-radius: 50%;
   width: 80px;
   height: 80px;
@@ -127,7 +126,7 @@
 }
 
 .menu-type-button .icon {
-  color: var(--brick);
+  color: var(--white);
   width: 50px;
   height: 50px;
   transition: all 0.3s ease;

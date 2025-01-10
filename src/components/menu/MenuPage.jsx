@@ -22,8 +22,9 @@ const categoryIcons = {
   "نوشیدنی": <Beer />
 };
 
-const fastFoodCategories = ["پیتزا", "سوخاری", "ساندویچ", "پیش غذا", "نوشیدنی", "غذای دریایی", "غذای فرنگی" , "برگر"];
-const cafeCategories = ["قهوه", "نوشیدنی سرد و گرم", "کیک", "آیس پک", "شیک", "ویتامینه", "آب میوه"];
+const iceCreamCategories = ["آیس پک", "ویتامینه", "آب میوه", "شیک"];
+const cafeCategories = ["قهوه", "نوشیدنی سرد و گرم", "کیک", "شیک"];
+const fastFoodCategories = ["پیتزا", "سوخاری", "ساندویچ", "پیش غذا", "نوشیدنی", "غذای دریایی", "غذای فرنگی", "برگر"];
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
@@ -45,14 +46,28 @@ const Menu = () => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = products.filter(product => 
-    (menuType === "fastFood" ? fastFoodCategories : cafeCategories).includes(product.category) &&
-    (selectedCategory ? product.category === selectedCategory : true)
-  );
+  const filteredProducts = products.filter(product => {
+    const categoryList =
+      menuType === "fastFood"
+        ? fastFoodCategories
+        : menuType === "cafe"
+        ? cafeCategories
+        : iceCreamCategories;
 
-  const filteredCategories = categories.filter(category => 
-    (menuType === "fastFood" ? fastFoodCategories : cafeCategories).includes(category)
-  );
+    return categoryList.includes(product.category) &&
+      (selectedCategory ? product.category === selectedCategory : true);
+  });
+
+  const filteredCategories = categories.filter(category => {
+    const categoryList =
+      menuType === "fastFood"
+        ? fastFoodCategories
+        : menuType === "cafe"
+        ? cafeCategories
+        : iceCreamCategories;
+
+    return categoryList.includes(category);
+  });
 
   return (
     <div className="body">
@@ -97,6 +112,17 @@ const Menu = () => {
               <Coffee className="icon" />
             </div>
             <span>کافه</span>
+          </motion.button>
+          <motion.button
+            className={`menu-type-button ${menuType === "iceCream" ? 'active' : ''}`}
+            onClick={() => setMenuType("iceCream")}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="icon-container">
+              <IceCream className="icon" />
+            </div>
+            <span>بستنی</span>
           </motion.button>
         </motion.div>
         <motion.div 

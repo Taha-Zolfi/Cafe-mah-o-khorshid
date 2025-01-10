@@ -1,0 +1,110 @@
+.footer {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: 4rem 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-logo {
+    margin-bottom: 2rem;
+  }
+  
+  .logo {
+    width: 160px;
+    height: auto;
+
+  }
+  
+  .footer-address {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-row {
+    display: flex;
+    justify-content: flex-start; /* برای اینکه آیکون‌ها سمت راست و متن‌ها سمت چپ باشند */
+    align-items: center;
+    margin-bottom: 1rem;
+    text-align: left; /* برای متن‌ها */
+  }
+  
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+    
+  }
+  
+  .phone-icon {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  
+  .phone-numbers {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .phone-numbers span {
+    margin: 0.25rem 0;
+  }
+  
+  @media (min-width: 768px) {
+    .footer {
+      padding: 5rem 2rem;
+      font-size: 1.4rem;
+    }
+  
+    .footer-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+  
+    .footer-logo, .footer-address, .footer-contact {
+      flex: 1;
+    }
+  
+    .logo {
+      width: 200px;
+    }
+  
+    .footer-address {
+      border-left: 2px solid rgba(255, 255, 255, 0.3);
+      border-right: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 0 2rem;
+      font-size: 1.5rem;
+    }
+  
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  

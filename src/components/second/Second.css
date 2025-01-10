@@ -1,0 +1,278 @@
+:root {
+    --blue: #252f3b;
+    --brick: #9b3c2a;
+    --white: #fcf7e3;
+  }
+  
+  @font-face {
+    font-family: 'iransansx';
+    src: url('../../assets/iranblack.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'iransansx';
+    src: url('../../assets/iranmed.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  * {font-family: 'iransansx', sans-serif;}
+  
+  .secbody {
+    background-color: var(--white);
+    background-image: url('../../assets/pattern.webp');
+  }
+  
+  .second {
+    padding-top: 5rem;
+    background-repeat: repeat;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .right {
+    background-color: var(--brick);
+    border-radius: 55px 0 0 55px;
+    color: var(--white);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 4rem;
+    font-size: 4rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.226);
+  }
+  
+  .left {
+    background-color: var(--brick);
+    border-radius: 0 55px 55px 0;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 4rem;
+    font-size: 4rem;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.226);
+  }
+  
+  .center{
+    border-radius: 50%;
+    background-color: var(--blue);
+    width: 10vw;
+    height: 10vw;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.226);
+  }
+  
+  .center img {
+    width: 10vw;
+    padding: 1.8rem;
+  }
+  
+  /* Favorite Items Section */
+  .favorite-items-container {
+    background-color: var(--blue);
+    border-radius: 30px;
+    padding: 2rem 1rem;
+    margin: 10rem auto;
+    position: relative;
+    max-width: 90vw;
+  }
+  
+  .favorite-items-title {
+    position: absolute;
+    top: -7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 3rem;
+    padding: 0.5rem 2rem;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  
+  .favorite-items-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  .favorite-item-card {
+    background-color: var(--white);
+    border-radius: 25px;
+    width: calc(20% - 0.8rem);
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .favorite-item-image {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+  }
+  
+  .favorite-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .favorite-item-info h3 {
+    color: var(--blue);
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .favorite-item-info p {
+    color: var(--blue);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .second-down {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6rem;
+  }
+  
+  .second-down .about {
+    background-color: var(--blue);
+    border-radius: 55px 0 0 55px;
+    padding: 1rem;
+  }
+  
+  .about{
+    text-align: center;
+    color: var(--white);
+    width: 40%;
+
+  }
+  
+  .about h1 {
+    text-align: center;
+    font-size: 4.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about p{
+    width: 80%;
+    text-align: right;
+    line-height: 1.6;
+    font-size: 2.8rem;
+    margin: 1rem auto;
+  }
+  
+  .second-down img{
+    width: 40vw;
+    /* max-width: 500px; */
+
+  }
+  
+  @media (max-width: 1024px) {
+    .favorite-items-grid {
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+  
+    .favorite-items-grid::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .favorite-item-card {
+      flex: 0 0 200px;
+      width: 200px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .second {
+        flex-direction: column; /* Stack the sections vertically */
+        align-items: center;
+        padding-top: 2rem;
+    }
+
+    .right, .left {
+        font-size: 2rem; /* Smaller font size */
+        width: 90%; /* Make them take more space */
+        text-align: center;
+        margin-bottom: 2rem; /* Space between left and right */
+        /* border-radius: 0 30px; Softer border-radius */
+        align-self: stretch; /* Ensure they stretch to take the full width */
+    }
+
+    .right {
+        margin-left: auto; /* Align to the right */
+    }
+
+    .left {
+        margin-right: auto; /* Align to the left */
+    }
+
+    .center {
+        width: 40vw; /* Adjust center image size */
+        height: 40vw;
+        display: block; /* Ensure it shows up */
+        margin: 2rem 0; /* Add margin for spacing */
+    }
+
+    .center img {
+        width: 100%;
+    }
+
+    .favorite-items-title {
+        font-size: 1.5rem;
+        padding: 0.5rem 1.5rem;
+        margin-top: 5rem;
+    }
+
+    .favorite-item-card {
+        flex: 0 0 160px;
+        width: 160px;
+    }
+
+    .favorite-item-info h3 {
+        font-size: 1rem;
+    }
+
+    .favorite-item-info p {
+        font-size: 1.2rem;
+    }
+
+    .second-down {
+        flex-direction: column;
+    }
+
+    .second-down img {
+        width: 100vw; /* Full width on mobile */
+        margin: 0; /* Remove any margin */
+        display: block; /* Make sure it's displayed as a block */
+    }
+
+    .about {
+        width: 90%; /* Ensure it takes up 90% of the screen width */
+        border-radius: 30px; /* Rounded corners */
+        padding: 2rem; /* Add some padding for spacing */
+        text-align: center; /* Center the text */
+        margin: 1rem 0; /* Add margin at the top and bottom */
+        align-self: flex-end; /* Align it to the right */
+    }
+
+    .about h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .about p {
+        width: 100%; /* Make sure text takes up the full width */
+        font-size: 1rem;
+        text-align: center; /* Center align the text */
+        margin: 0 auto;
+    }
+}
