@@ -62,8 +62,8 @@ body {
 }
 
 .First .content img {
-    width: 100%;
-    max-width: 80vw;
+    width: 150%;
+    max-width:80vw;
     height: auto;
 }
 
@@ -73,7 +73,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 2rem;
+    padding: 10rem;
     width: fit-content;
     max-width: 90%;
     margin: 2rem auto;
@@ -132,7 +132,7 @@ body {
     }
 
     .First .content {
-        padding: 1rem;
+        padding: 4rem;
         border-width: 10px;
         outline-width: 3px;
     }
@@ -175,7 +175,7 @@ body {
     }
 
     .First .content {
-        padding: 0.7rem;
+        padding: 1.7rem;
         border-width: 8px;
         outline-width: 2px;
     }
