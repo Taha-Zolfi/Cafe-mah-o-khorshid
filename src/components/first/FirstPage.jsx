@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './First.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.webp';
 
 const First = () => {
   const contentVariants = {
