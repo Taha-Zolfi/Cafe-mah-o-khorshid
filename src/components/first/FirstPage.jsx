@@ -63,13 +63,26 @@ const First = () => {
         href="/menu"
         variants={itemVariants}
       >
-        <motion.button
-          className='btn'
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          مشاهده منو
-        </motion.button>
+<motion.button
+  className="btn"
+  initial={{ opacity: 0, y: 50 }} // Start hidden and below
+  animate={{ opacity: 1, y: 0 }} // Animate to visible and in place
+  transition={{ duration: 0.2, ease: "easeOut" }} // Smooth animation
+  whileHover={{
+    scale: 1.1,
+    backgroundColor: "#FF6347",
+    color: "#fcf7e3",
+    boxShadow: "0px 5px 15px rgba(255, 99, 71, 0.4)",
+    transition: { duration: 0.1 },
+  }}
+  whileTap={{
+    scale: 0.9,
+    transition: { duration: 0.1 },
+  }}
+>
+  مشاهده منو
+</motion.button>
+
       </motion.a>
     </div> 
   );
